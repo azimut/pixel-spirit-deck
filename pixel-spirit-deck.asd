@@ -13,4 +13,5 @@
                #:rtg-math.vari
                #:dendrite
                #:nineveh)
-  :components ((:file "package")))
+  :components ((:file "package")
+               (:file "lib/helpers")))
