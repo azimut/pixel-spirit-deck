@@ -286,3 +286,178 @@
                    (flip (g-fill (rect-sdf (- st o) s) .4)
                          (g-fill (rect-sdf (+ st o) s) .4)))))
     (v! color 1)))
+
+;;; 024-the_oak.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0 0 0))
+         (st (rotate st (radians 45.)))
+         (r1 (rect-sdf st (v2! 1.0)))
+         (r2 (rect-sdf (+ st .15) (v2! 1.0)))
+         (color (+ color (stroke r1 .5 .05)))
+         (color (* color (step .325 r2)))
+         ;;; adds a second rect
+         (color (* (g-fill r1 .525) ;; this rm the outside part
+                   (+ color (stroke r2 .325 .05))))
+         ;; draws a smaller rect
+         (color (+ color (stroke r2 .2 .05))))
+    (v! color 1)))
+
+;;; 025-ripples.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0 0 0))
+         (st (- (rotate st (radians -45)) .08)))
+    (for (i 0) (< i 4) (++ i)
+         (let* ((r (rect-sdf st (v2! 1.0))))
+           (incf color (v3! (stroke r .19 .04)))
+           (incf st    (v2! .05))))
+    (v! color 1)))
+
+;;; 026-the_emperatris.frag
+;;; !?
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0 0 0))
+         (d1 (poly-sdf st 5))
+         (ts (v2! (x st) (- 1.0 (y st))))
+         (d2 (poly-sdf ts 5))
+         (color (+ color (* (g-fill d1 .75)
+                            (g-fill (fract (* 5.0 d1)) .5))))
+         (color (- color (* (g-fill d1 .6)
+                            (g-fill (fract (* 4.9 d2)) .45)))))
+    (v! color 1)))
+
+;;; 027-bundle.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0 0 0))
+         (st (v! (y st) (x st)))
+         ;; outer
+         (color (+ color (stroke (hex-sdf st) .6 .1)))
+         ;; inner things
+         (color (+ color (g-fill (hex-sdf (- st (v! -.06 -.1)))
+                                 .15)))
+         (color (+ color (g-fill (hex-sdf (- st (v! -.06 .1)))
+                                 .15)))
+         (color (+ color (g-fill (hex-sdf (- st (v! .11 .0)))
+                                 .15))))
+    (v! color 1)))
+
+;;; 028-the_devil.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0 0 0))
+         (color (+ color (stroke (circle-sdf st) .8 .05)))
+         ;; ? rotates?
+         (st    (v! (x st) (- 1.0 (y st))))
+         (s     (star-sdf (s~ st :yx) 5 .1))
+         ;; cuts circle in 5 places
+         (color (* color (step .7 s)))
+         ;; place a inner star
+         (color (+ color (stroke s .4 .1))))
+    (v! color 1)))
+
+;;; 029-the_sun.frag
+;; !?!
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0 0 0))
+         (bg (star-sdf st 16 .1))
+         (color (+ color (g-fill bg 1.3)))
+         (l 0.0))
+    (for (i 0) (< i 8) (++ i)
+         (let* ((xy (rotate st (* i 0.785398)))
+                (xy (v! (x xy) (- (y xy) .3)))
+                (tri (poly-sdf xy 3)))
+           (setf color (+ color (g-fill tri .3)))
+           (incf l (stroke tri .3 .03))))
+    (let* (;; draws the inner strokes
+           (color (* color (- 1.0 l)))
+           ;; inner poly
+           (c (poly-sdf st 8))
+           (color (- color (stroke c .15 .04))))
+      (v! color 1))))
+
+
+;;; 030-the_star.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0 0 0))
+         ;; rays
+         (color (+ color (stroke (rays-sdf st 8)
+                                 .5 .15)))
+         ;; stars
+         (inner (star-sdf (s~ st :xy) 6 .09))
+         (outer (star-sdf (s~ st :yx) 6 .09))
+         (color (* color (step .7 outer)))
+         (color (+ color (g-fill outer .5)))
+         (color (- color (stroke inner .25 .06)))
+         (color (+ color (stroke outer .6 .05))))
+    (v! color 1)))
+
+;;; 031-Jugment.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0.0))
+         (color (+ color
+                   (flip (stroke (rays-sdf st 28) .5 .2)
+                         (g-fill (y st) .5))))
+         (rect  (rect-sdf st (v2! 1.0)))
+         (color (* color (step .25 rect)))
+         (color (+ color (g-fill rect .2))))
+    (v! color 1)))
+
+;;; 032-the_fortune.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0.0))
+         (sdf (poly-sdf (s~ st :yx) 8))
+         (color (+ color (g-fill sdf .5)))
+         (color (* color (stroke (rays-sdf st 8) .5 .2)))
+         ;; inner poly hole
+         (color (* color (step .27 sdf)))
+         ;; inner poly border
+         (color (+ color (stroke sdf .2 .05)))
+         ;; outer poly border
+         (color (+ color (stroke sdf .6 .1))))
+    (v! color 1)))
+
+;;; 033-vision.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0.0))
+         (v1 (vesica-sdf st .5))
+         (st2 (+ (s~ st :yx) (v2! .04 .0)))
+         (v2 (vesica-sdf st2 .7))
+         ;; side to side
+         (color (+ color (stroke v2 1. .05)))
+         ;; eyelid
+         (color (+ color (* (g-fill v2 1.)
+                            (stroke (circle-sdf st) .3 .05))))
+         ;; rays as a oval (v1)
+         (color (+ color (* (g-fill (rays-sdf st 50) .2)
+                            (g-fill v1 1.25)
+                            (step 1. v2)))))
+    (v! color 1)))
+
+;;; 034-the_lovers.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0.0))
+         (color (+ color (g-fill (heart-sdf st) .5)))
+         (color (- color (stroke (poly-sdf st 3) .15 .05))))
+    (v! color 1)))
+
+;;; 035-magician.frag
