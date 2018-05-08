@@ -145,3 +145,9 @@
     (- r (+ 1.26 (- (/ (* (y st) (pow (abs (x st)) .67))
                        (+ 1.5 (y st)))
                     (* 2 (y st)))))))
+
+;;; 035
+
+(defun-g bridge ((c :vec3) (d :float) (s :float) (w :float))
+  (let ((c (* c (- 1f0 (stroke d s (* 2f0 w))))))
+    (+ c (stroke d s w))))
