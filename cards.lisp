@@ -273,3 +273,16 @@
                                  .4)))
          (color (* color (step .38 (rect-sdf (+ st .025) s)))))
     (v! color 1)))
+
+;;; 023-opposite.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (color (v3! 0 0 0))
+         (st (rotate st (radians -45)))
+         (s (v2! 1.0))
+         (o .05)
+         (color (+ color
+                   (flip (g-fill (rect-sdf (- st o) s) .4)
+                         (g-fill (rect-sdf (+ st o) s) .4)))))
+    (v! color 1)))
