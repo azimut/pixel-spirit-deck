@@ -1,5 +1,27 @@
 (in-package :pixel-spirit-deck)
 
+(defmacro defcard (() &body body)
+  `(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
+     (let* ((st  (/ (s~ gl-frag-coord :xy)
+                    resolution))
+            (color  (v! 0 0 0))
+            ;; this helps keeping things inside
+            (st (+ .5 (* 1.1912 (- st .5)))))
+       ;; this removes some artifacts on bridges AND
+       ;; keeps the aspect ratio
+       (if (> (y resolution) (x resolution))
+           (progn
+             (multf (y st) (/ (y resolution) (x resolution)))
+             (decf  (y st) (/ (- (* .5 (y resolution))
+                                 (* .5 (x resolution)))
+                              (x resolution))))
+           (progn
+             (multf (x st) (/ (x resolution) (y resolution)))
+             (decf  (x st) (/ (- (* .5 (x resolution))
+                                 (* .5 (y resolution)))
+                              (y resolution)))))
+       ,@body)))
+
 ;;; 001-justice.frag
 (defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
@@ -543,40 +565,6 @@
          (color (bridge color bridges .5 w))
          )
     (v! color 1)))
-
-;;; 038 - bis - with full description from the frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
-  (let* ((st     (/ (s~ gl-frag-coord :xy)
-                    resolution))
-         (color  (v! 0 0 0))
-         ;; this helps keeping things inside
-         (st (+ .5 (* 1.1912 (- st .5)))))
-    ;; this removes some artifacts on bridges AND
-    ;; keeps the aspect ratio
-    (if (> (y resolution) (x resolution))
-        (progn
-          (multf (y st) (/ (y resolution) (x resolution)))
-          (decf  (y st) (/ (- (* .5 (y resolution))
-                              (* .5 (x resolution)))
-                           (x resolution))))
-        (progn
-          (multf (x st) (/ (x resolution) (y resolution)))
-          (decf  (x st) (/ (- (* .5 (x resolution))
-                              (* .5 (y resolution)))
-                           (y resolution)))))
-    (let* ((r1  (rect-sdf st (v2! 1.0)))
-           (r   (rotate st (radians 45.0)))
-           (r2  (rect-sdf r (v2! 1.0)))
-           (inv (step .5 (* .5 (+ (x st) (y st)))))
-           (inv (flip inv (step .5 (+ .5 (* .5 (- (x st)
-                                                  (y st)))))))
-           (w .075)
-           (color (+ color (stroke r1 .5 w) (stroke r2 .5 w)))
-           (bridges (mix r1 r2 inv))
-           (color (bridge color bridges .5 w)))
-      
-      (v! color 1))))
-
 
 ;;; 039-the_loop.frag
 (defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
