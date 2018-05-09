@@ -151,3 +151,8 @@
 (defun-g bridge ((c :vec3) (d :float) (s :float) (w :float))
   (let ((c (* c (- 1f0 (stroke d s (* 2f0 w))))))
     (+ c (stroke d s w))))
+
+;;; 044
+(defun-g scale ((st :vec2) (s :vec2))
+  (+ .5 (* (- st .5)
+           s)))
