@@ -713,5 +713,27 @@
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
          (color  (v3! 0 0 0))
-         )
+         (color (+ color (g-fill (flower-sdf st 5) .25)))
+         ;; cut petals
+         (color (- color (step .95 (star-sdf (rotate st .628)
+                                             5 .1))))
+         (color (clamp color 0.0 1.0))
+         (circle (circle-sdf st))
+         ;; inner circle
+         (color (- color (stroke circle .1 .05)))
+         ;; outer circle
+         (color (+ color (stroke circle .8 .07))))
     (v! color 1)))
+
+;;; 047-the_fool.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+  (let* ((st (/ (s~ gl-frag-coord :xy)
+                resolution))
+         (st (+ .5 (* 1.1912 (- st .5))))
+         (color (v3! 0 0 0))
+         (color (+ color (step .5 (spiral-sdf st .13)))))
+    (v! color 1)))
+
+;;; 048-enlightment.frag
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+    (v! 1 1 1 1))

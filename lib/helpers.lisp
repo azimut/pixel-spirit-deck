@@ -153,6 +153,26 @@
     (+ c (stroke d s w))))
 
 ;;; 044
+
 (defun-g scale ((st :vec2) (s :vec2))
   (+ .5 (* (- st .5)
            s)))
+
+;;; 046
+
+(defun-g flower-sdf ((st :vec2) (N :int))
+  (let* ((st (- (* st 2f0) 1f0))
+         (r  (* 2f0 (length st)))
+         (a  (atan (y st) (x st)))
+         (v  (* .5 (float N))))
+    (- 1f0 (/ (+ .5 (* .5 (abs (cos (* a v)))))
+              r))))
+
+;;; 047
+
+(defun-g spiral-sdf ((st :vec2) (tt :float))
+  (let* ((st (- st .5))
+         (r  (dot st st))
+         (a  (atan (y st) (x st))))
+    (abs (sin (fract (+ (* tt (log r))
+                        (* a .159)))))))
