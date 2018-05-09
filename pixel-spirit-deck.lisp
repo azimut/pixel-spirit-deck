@@ -5,7 +5,8 @@
           (+ (v2! .5) (* vert .5))))
 
 ;;; 000-void.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2)
+               (time :float))
   (v! 0 0 0 1))
 
 (defpipeline-g pipe ()
@@ -18,7 +19,8 @@
           res)
     (as-frame
       (map-g #'pipe (get-quad-stream-v2)
-             :resolution res))))
+             :resolution res
+             :time (/ (get-internal-real-time) 1000f0)))))
 
 (def-simple-main-loop play ()
   (draw!))

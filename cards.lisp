@@ -1,7 +1,7 @@
 (in-package :pixel-spirit-deck)
 
 ;;; 001-justice.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v! 0 0 0))
@@ -9,7 +9,7 @@
     (v! color 1)))
 
 ;;; 002-strenght.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v! 0 0 0))
@@ -21,7 +21,7 @@
     (v! color 1)))
 
 ;;; 003-death.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v! 0 0 0))
@@ -31,7 +31,7 @@
 
 
 ;;; 004-the_wall.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st    (/ (s~ gl-frag-coord :xy)
                    resolution))
          (color (v! 0 0 0))
@@ -39,7 +39,7 @@
     (v! color 1)))
 
 ;;; 005-temperance.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st    (/ (s~ gl-frag-coord :xy)
                    resolution))
          (color (v! 0 0 0))
@@ -56,7 +56,7 @@
     (v! color 1)))
 
 ;;; 006-branch.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st     (/ (s~ gl-frag-coord :xy)
                     resolution))
          (color  (v! 0 0 0))
@@ -65,7 +65,7 @@
     (v! color 1)))
 
 ;;; 007-thm.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st      (/ (s~ gl-frag-coord :xy)
                      resolution))
          (color   (v! 0 0 0))
@@ -76,7 +76,7 @@
     (v! color 1)))
 
 ;;; 008-the_high_priestess.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st      (/ (s~ gl-frag-coord :xy)
                      resolution))
          (color   (v! 0 0 0))
@@ -86,7 +86,7 @@
     (v! color 1)))
 
 ;;; 009-the_moon.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st    (/ (s~ gl-frag-coord :xy)
                    resolution))
          (color (v! 0 0 0))
@@ -98,7 +98,7 @@
     (v! color 1)))
 
 ;;; 010-the_emperor.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st    (/ (s~ gl-frag-coord :xy)
                    resolution))
          (color (v! 0 0 0))
@@ -108,7 +108,7 @@
     (v! color 1)))
 
 ;;; 011-hierophant.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st    (/ (s~ gl-frag-coord :xy)
                    resolution))
          (color (v! 0 0 0))
@@ -130,7 +130,7 @@
     (v! color 1)))
 
 ;;; 012-the_tower.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v! 0 0 0))
@@ -141,7 +141,7 @@
     (v! color 1)))
 
 ;;; 013-the_merge.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color  (v3! 0 0 0))
@@ -153,7 +153,7 @@
     (v! color 1)))
 
 ;;; 014-hope.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color  (v3! 0 0 0))
@@ -164,7 +164,7 @@
     (v! color 1)))
 
 ;;; 015-the_temple.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color  (v3! 0 0 0))
@@ -178,7 +178,7 @@
     (v! color 1)))
 
 ;;; 016-the_sumit.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -192,7 +192,7 @@
     (v! color 1)))
 
 ;;; 017-diamond.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -207,7 +207,7 @@
     (v! color 1)))
 
 ;;; 018-the_hermit.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -216,7 +216,7 @@
     (v! color 1)))
 
 ;;; 019-intuition.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -228,7 +228,7 @@
     (v! color 1)))
 
 ;;; 020-the_stone.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -242,7 +242,7 @@
     (v! color 1)))
 
 ;;; 021-mountains.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -262,7 +262,7 @@
     (v! color 1)))
 
 ;;; 022-the_shadow.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -277,7 +277,7 @@
     (v! color 1)))
 
 ;;; 023-opposite.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -290,7 +290,7 @@
     (v! color 1)))
 
 ;;; 024-the_oak.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -308,7 +308,7 @@
     (v! color 1)))
 
 ;;; 025-ripples.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -322,7 +322,7 @@
 
 ;;; 026-the_emperatris.frag
 ;;; !?
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -336,7 +336,7 @@
     (v! color 1)))
 
 ;;; 027-bundle.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -353,7 +353,7 @@
     (v! color 1)))
 
 ;;; 028-the_devil.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -369,7 +369,7 @@
 
 ;;; 029-the_sun.frag
 ;; !?!
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -391,7 +391,7 @@
 
 
 ;;; 030-the_star.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0 0 0))
@@ -408,7 +408,7 @@
     (v! color 1)))
 
 ;;; 031-Jugment.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0.0))
@@ -421,7 +421,7 @@
     (v! color 1)))
 
 ;;; 032-the_fortune.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0.0))
@@ -437,7 +437,7 @@
     (v! color 1)))
 
 ;;; 033-vision.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -457,7 +457,7 @@
     (v! color 1)))
 
 ;;; 034-the_lovers.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -467,7 +467,7 @@
     (v! color 1)))
 
 ;;; 035-magician.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0.0))
@@ -482,7 +482,7 @@
     (v! color 1)))
 
 ;;; 036-the_link.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (color (v3! 0f0))
@@ -506,7 +506,7 @@
     (v! color 1)))
 
 ;;; 037-holding_together.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -525,7 +525,7 @@
     (v! color 1)))
 
 ;;; 038-the_chariot.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st     (/ (s~ gl-frag-coord :xy)
                     resolution))
          (color  (v! 0 0 0))
@@ -545,7 +545,7 @@
     (v! color 1)))
 
 ;;; 038 - bis - with full description from the frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st     (/ (s~ gl-frag-coord :xy)
                     resolution))
          (color  (v! 0 0 0))
@@ -579,7 +579,7 @@
 
 
 ;;; 039-the_loop.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -596,7 +596,7 @@
     (v! color 1)))
 
 ;;; 040-stanstill.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -613,7 +613,7 @@
     (v! color 1)))
 
 ;;; 041-trinity.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -634,7 +634,7 @@
     (v! color 1)))
 
 ;;; 042-gather.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -651,7 +651,7 @@
     (v! color 1)))
 
 ;;; 043-the_clan.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -671,7 +671,7 @@
 
 
 ;;; 044-the_core.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -688,7 +688,7 @@
     (v! color 1)))
 
 ;;; 045-inner_truth.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -708,7 +708,7 @@
     (v! color 1)))
 
 ;;; 046-the_world.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -726,7 +726,7 @@
     (v! color 1)))
 
 ;;; 047-the_fool.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
                 resolution))
          (st (+ .5 (* 1.1912 (- st .5))))
@@ -735,5 +735,5 @@
     (v! color 1)))
 
 ;;; 048-enlightment.frag
-(defun-g frag ((uv :vec2) &uniform (resolution :vec2))
+(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
     (v! 1 1 1 1))

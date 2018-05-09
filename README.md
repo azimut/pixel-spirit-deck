@@ -9,4 +9,4 @@ To practice lisp, and glsl. To have fun. To have a library of the functions prov
 ### TODO
 * Shader lisp macro (aka defmacro-g) to add the boilerplate of each card (st mangling) implicitly.
 * Have a way to iterate through each fragment.
-* Add time
+* ~~Add time~~
