@@ -1,27 +1,5 @@
 (in-package :pixel-spirit-deck)
 
-(defmacro defcard (() &body body)
-  `(defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
-     (let* ((st  (/ (s~ gl-frag-coord :xy)
-                    resolution))
-            (color  (v! 0 0 0))
-            ;; this helps keeping things inside
-            (st (+ .5 (* 1.1912 (- st .5)))))
-       ;; this removes some artifacts on bridges AND
-       ;; keeps the aspect ratio
-       (if (> (y resolution) (x resolution))
-           (progn
-             (multf (y st) (/ (y resolution) (x resolution)))
-             (decf  (y st) (/ (- (* .5 (y resolution))
-                                 (* .5 (x resolution)))
-                              (x resolution))))
-           (progn
-             (multf (x st) (/ (x resolution) (y resolution)))
-             (decf  (x st) (/ (- (* .5 (x resolution))
-                                 (* .5 (y resolution)))
-                              (y resolution)))))
-       ,@body)))
-
 ;;; 001-justice.frag
 (defun-g frag ((uv :vec2) &uniform (resolution :vec2) (time :float))
   (let* ((st (/ (s~ gl-frag-coord :xy)
